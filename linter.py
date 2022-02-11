@@ -1,10 +1,13 @@
-from SublimeLinter.lint import Linter  # or NodeLinter, PythonLinter, ComposerLinter, RubyLinter
+from SublimeLinter.lint import Linter, util
 
 
-class __class__(Linter):
-    cmd = '__cmd__'
-    regex = r''
+class BeanCheck(Linter):
+    cmd = ('bean-check',)
+    regex = r'^\S.*:(?P<line>[0-9]+):    (?P<message>.*)$'
     multiline = False
+    error_stream = util.STREAM_STDERR
+
+    tempfile_suffix = '.beancount'
     defaults = {
-        'selector': 'source.python'
+        'selector': 'source.beancount'
     }
